@@ -1,0 +1,76 @@
+\documentclass{scrartcl}
+\usepackage[german]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+%\usepackage{endnotes}
+\usepackage{enotez}
+\usepackage[stable]{footmisc}
+%\usepackage{verse}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{floatflt}
+\usepackage{graphicx}
+\usepackage[space]{grffile}     % Unterstützung von Leerzeichen in Dateinamen
+\usepackage{soul}
+\usepackage{forloop}
+\usepackage{unicode-math}
+\usepackage{libertine}
+\usepackage{chngcntr}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\graphicspath{{bilder/}}
+
+\input{WS_Kommandos.tex}
+\counterwithout{footnote}{section}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\makeatletter                   % https://github.com/ho-tex/oberdiek/issues/31
+\def\Gread@@xetex#1{%           % bei Bildern mit Leerzeichen wird der Teil nach
+ \IfFileExists{"\Gin@base".bb}% % dem ersten Leerzeichen als Text ins PDF geschrieben.
+ {\Gread@eps{\Gin@base.bb}}%    % Dieser Code repariert das.
+ {\Gread@@xetex@aux#1}%
+}
+\makeatother
+
+\begin{document}
+\newcounter{seite}
+
+\begin{titlepage}
+\centering
+\input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-9.tex}
+\end{titlepage}
+
+%\input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-01.tex}
+%\end{document}
+
+\forloop{seite}{11}{\value{seite} < 23}%
+{%
+    \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-\theseite.tex}
+}
+% Seite 23 bis 28 ist das Inhaltsverzeichnis, wird automatisch erstellt
+\tableofcontents
+
+\forloop{seite}{29}{\value{seite} < 392}%392
+{%
+    \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-\theseite.tex}
+}
+%\end{document}
+% Seite 392 ist leer
+\input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-393.tex}
+
+%\theendnotes
+\printendnotes
+\end{document}
+
+% Seite 394 ist leer
+\forloop{seite}{395}{\value{seite} < 459}% letzte Seite = 458
+{%
+    \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-\theseite.tex}
+}
+\end{document}
