@@ -17,8 +17,16 @@
 \newcommand{\Buch}[2]{\newpage\begin{center}\part{#2}\end{center}}
 \newcommand{\Kapitel}[1]{\section{#1}}
 \newcommand{\PageDefEinzV}[4]{#4}
-\newcommand{\Bildsvg}[3]{\begin{floatingfigure}[r]{0.4\linewidth}\input{latex/"#1".tex}\caption{#1}\end{floatingfigure}}
-\newcommand{\Bild}[3]{\begin{floatingfigure}[r]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}
+\newcommand{\Bildsvg}[3]{
+                         \ifthenelse{\equal{#3}{right}}{\begin{floatingfigure}[r]{0.4\linewidth}\input{latex/"#1".tex}\caption{#1}\end{floatingfigure}}{}
+                         \ifthenelse{\equal{#3}{left}}{\begin{floatingfigure}[l]{0.4\linewidth}\input{latex/"#1".tex}\caption{#1}\end{floatingfigure}}{}
+                         \ifthenelse{\equal{#3}{center}}{\begin{figure}\centering\input{latex/"#1".tex}\caption{#1}\end{figure}}{}
+                        }
+\newcommand{\Bild}[3]{
+                      \ifthenelse{\equal{#3}{right}}{\begin{floatingfigure}[r]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
+                      \ifthenelse{\equal{#3}{left}}{\begin{floatingfigure}[l]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
+                      \ifthenelse{\equal{#3}{center}}{\begin{figure}\centering\includegraphics[width=\linewidth]{#1}\caption{#1}\end{figure}}{}
+                     }
 %\newcommand{\Bild}[3]{\includegraphics[width=0.25\linewidth]{#1}}
 \newcommand{\LineCenterSize}[3]{
                                 \ifthenelse{\equal{#1}{100}}{\begin{center}#3\end{center}}{}

@@ -1,0 +1,13 @@
+.gitignore
+*.aux
+*.log
+*.pdf
+*.toc
+*.out
+*.e4p
+.eric6project/
+bilder/
+latex/
+wikisource/
+__init__.py
+__pycache__
