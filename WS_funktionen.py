@@ -36,6 +36,9 @@ def erzeuge_latex_datei(WS_Seite, EINGABE_DIR, AUSGABE_DIR, BILDER_DIR, Anmerkun
     while len(re.findall('{{', Datei_Inhalt)) > 0:
         Datei_Inhalt = parse_WS_Vorlagen(Datei_Inhalt)
 
+    while len(re.findall('{\|', Datei_Inhalt)) > 0:
+        Datei_Inhalt = parse_Tabellen(Datei_Inhalt)
+
     print(WS_Seite)
     Anmerkungen = extrahiere_Anmerkungen(Datei_Inhalt, Anmerkungen, AUSGABE_DIR, WS_Seite)
 
@@ -71,6 +74,12 @@ def extrahiere_Anmerkungen(Datei_Inhalt, Anmerkungen, AUSGABE_DIR, WS_Seite):
     return Anmerkungen
 
     
+def parse_Tabellen(Datei_Inhalt):
+    """Findet Tabellen."""
+
+    Datei_Inhalt = re.sub('\{\|((?:(?!{\|).)*?)\|}', '\\\\Tabelle{\\1}', Datei_Inhalt, flags=re.DOTALL)
+    return Datei_Inhalt
+
 def parse_Gliederung(Datei_Inhalt):
     """Sucht nach Büchern und Kapitel."""
 
@@ -106,7 +115,6 @@ def parse_WS_Vorlagen(Datei_Inhalt):
     Datei_Inhalt = re.sub('\{\{LineCenterSize\|([0-9]*?)\|([0-9]*?)\|((?:(?!{{).)*?)}}', '\\\\LineCenterSize{\\1}{\\2}{\\3}', Datei_Inhalt)
 #    Datei_Inhalt = re.sub("\{\{LineCenterSize.*?Capitel.*?'''((?:(?!{{).)*?)'''}}", '\chapter{\\1}', Datei_Inhalt, flags=re.DOTALL)
 #    Datei_Inhalt = re.sub('\{\{((?:(?!{{).)*?)}}', '\\\\WSVorlage{\\1}', Datei_Inhalt, flags=re.DOTALL)
-    Datei_Inhalt = re.sub('\{\|((?:(?!{{).)*?)\|}', '\\\\Tabelle{\\1}', Datei_Inhalt, flags=re.DOTALL)
     return Datei_Inhalt
 
 def parse_WS_HTML_Markup(Datei_Inhalt, EINGABE_DIR, AUSGABE_DIR, BILDER_DIR):

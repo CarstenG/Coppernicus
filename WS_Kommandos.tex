@@ -7,7 +7,7 @@
 \newcommand{\Bruch}[2]{\nicefrac{#1}{#2}}
 %\newcommand{\Anker}[1]{\label{#1}}
 \newcommand{\Anker}[1]{}
-\newcommand{\Tabelle}[1]{Tabelle}
+\newcommand{\Tabelle}[1]{Tabellencode}
 \newcommand{\CRef}[3]{\protect\endnote{#2}}
 \newcommand{\SeiteLST}[2]{\protect\input{latex/Seite:#1-#2.tex}}
 \newcommand{\link}[2]{\url{#1}{#2}}
@@ -22,9 +22,14 @@
                          \ifthenelse{\equal{#3}{left}}{\begin{floatingfigure}[l]{0.4\linewidth}\input{latex/"#1".tex}\caption{#1}\end{floatingfigure}}{}
                          \ifthenelse{\equal{#3}{center}}{\begin{figure}\centering\input{latex/"#1".tex}\caption{#1}\end{figure}}{}
                         }
+%\newcommand{\Bild}[3]{
+%                      \ifthenelse{\equal{#3}{right}}{\begin{floatingfigure}[r]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
+%                      \ifthenelse{\equal{#3}{left}}{\begin{floatingfigure}[l]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
+%                      \ifthenelse{\equal{#3}{center}}{\begin{figure}\centering\includegraphics[width=\linewidth]{#1}\caption{#1}\end{figure}}{}
+%                     }
 \newcommand{\Bild}[3]{
-                      \ifthenelse{\equal{#3}{right}}{\begin{floatingfigure}[r]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
-                      \ifthenelse{\equal{#3}{left}}{\begin{floatingfigure}[l]{0.35\linewidth}\includegraphics[width=0.33\linewidth]{#1}\caption{#1}\end{floatingfigure}}{}
+                      \ifthenelse{\equal{#3}{right}}{\begin{wrapfigure}{R}{0.35\linewidth}\includegraphics[width=\linewidth]{#1}\caption{#1}\end{wrapfigure}}{}
+                      \ifthenelse{\equal{#3}{left}}{\begin{wrapfigure}{L}{0.35\linewidth}\includegraphics[width=\linewidth]{#1}\caption{#1}\end{wrapfigure}}{}
                       \ifthenelse{\equal{#3}{center}}{\begin{figure}\centering\includegraphics[width=\linewidth]{#1}\caption{#1}\end{figure}}{}
                      }
 %\newcommand{\Bild}[3]{\includegraphics[width=0.25\linewidth]{#1}}

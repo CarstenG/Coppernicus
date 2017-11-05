@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass[paper=125mm:190mm,DIV=14,fontsize=10pt]{scrartcl}
 \usepackage[german]{babel}
 %\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -11,6 +11,7 @@
 \usepackage{tikz}
 \usetikzlibrary{calc,intersections}
 \usepackage{floatflt}
+\usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage[space]{grffile}     % Unterstützung von Leerzeichen in Dateinamen
 \usepackage{soul}
@@ -51,17 +52,21 @@
 
 \forloop{seite}{11}{\value{seite} < 23}%
 {%
+    \marginpar{S. \theseite} % nur zur Orientierung während der Entwicklung
     \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-\theseite.tex}
 }
 % Seite 23 bis 28 ist das Inhaltsverzeichnis, wird automatisch erstellt
 \tableofcontents
+%\end{document}
 
 \forloop{seite}{29}{\value{seite} < 392}%392
 {%
+    \marginpar{S. \theseite} % nur zur Orientierung während der Entwicklung
     \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-\theseite.tex}
 }
 %\end{document}
 % Seite 392 ist leer
+    \marginpar{393} % nur zur Orientierung während der Entwicklung
 \input{latex/Seite:Kreisbewegungen-Coppernicus-0.djvu-393.tex}
 
 %\theendnotes
